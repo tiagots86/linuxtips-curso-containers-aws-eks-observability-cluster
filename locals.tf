@@ -12,6 +12,18 @@ service:
     type: NodePort
 initChownData:
     enabled: false
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Loki
+        type: loki
+        access: proxy
+        url: http://loki-gateway.loki.svc.cluster.local
+        isDefault: false
+        jsonData:
+          maxLines: 1000
     
     VALUES
   }
