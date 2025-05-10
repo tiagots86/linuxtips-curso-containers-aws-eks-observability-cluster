@@ -21,7 +21,7 @@ data "aws_eks_addon_version" "efs" {
   addon_name         = "aws-efs-csi-driver"
   kubernetes_version = aws_eks_cluster.main.version
   most_recent        = true
-} 
+}
 
 resource "aws_eks_addon" "efs_csi" {
   cluster_name = aws_eks_cluster.main.name
