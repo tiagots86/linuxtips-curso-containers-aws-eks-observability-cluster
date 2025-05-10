@@ -1,6 +1,6 @@
 locals {
-    grafana = {
-        values: <<-VALUES
+  grafana = {
+    values : <<-VALUES
 adminUser: admin
 adminPassword: linuxtips        
         
@@ -14,5 +14,5 @@ initChownData:
     enabled: false
     
     VALUES
-    }
+  }
 }
