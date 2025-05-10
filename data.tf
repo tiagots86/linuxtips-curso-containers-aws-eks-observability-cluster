@@ -17,8 +17,8 @@ data "aws_ssm_parameter" "lb_subnets" {
 }
 
 data "aws_ssm_parameter" "lb_grafana_subnets" {
-  count = length(var.ssm_lb_subnets)
-  name  = var.ssm_lb_subnets[count.index]
+  count = length(var.ssm_grafana_subnets)
+  name  = var.ssm_grafana_subnets[count.index]
 }
 
 data "aws_eks_cluster_auth" "default" {

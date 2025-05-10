@@ -1,4 +1,4 @@
-project_name = "linuxtips-control-plane"
+project_name = "linuxtips-observability"
 
 k8s_version = "1.32"
 
@@ -11,10 +11,17 @@ ssm_subnets = [
 ]
 
 ssm_lb_subnets = [
+  "/linuxtips-vpc/subnets/private/us-east-1a/linuxtips-private-1a",
+  "/linuxtips-vpc/subnets/private/us-east-1b/linuxtips-private-1b",
+  "/linuxtips-vpc/subnets/private/us-east-1c/linuxtips-private-1c",
+]
+
+ssm_grafana_subnets = [
   "/linuxtips-vpc/subnets/public/us-east-1a/linuxtips-public-1a",
   "/linuxtips-vpc/subnets/public/us-east-1b/linuxtips-public-1b",
   "/linuxtips-vpc/subnets/public/us-east-1c/linuxtips-public-1c",
 ]
+
 
 karpenter_capacity = [
   {
@@ -26,5 +33,5 @@ karpenter_capacity = [
     instance_sizes     = ["large", "xlarge", "2xlarge"]
     capacity_type      = ["spot", "on-demand"]
     availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
-  },
+  }
 ]

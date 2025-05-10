@@ -19,6 +19,10 @@ variable "ssm_lb_subnets" {
   type = list(string)
 }
 
+variable "ssm_grafana_subnets" {
+  type = list(string)
+}
+
 
 variable "node_group_temp_desired" {
   type    = number
