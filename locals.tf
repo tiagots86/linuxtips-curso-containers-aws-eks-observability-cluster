@@ -17,7 +17,7 @@ initChownData:
   }
 
   loki = {
-    values: <<-VALUES
+    values : <<-VALUES
 loki:
     schemaConfig:
         configs:
