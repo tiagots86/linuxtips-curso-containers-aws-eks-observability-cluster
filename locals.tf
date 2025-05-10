@@ -1,6 +1,6 @@
 locals {
   grafana = {
-    values : <<-VALUES
+    values: <<-VALUES
 adminUser: admin
 adminPassword: linuxtips        
         
@@ -13,6 +13,10 @@ service:
 initChownData:
     enabled: false
 
+nodeSelector:
+    karpenter.sh/nodepool: grafana
+
+
 datasources:
   datasources.yaml:
     apiVersion: 1
@@ -24,12 +28,12 @@ datasources:
         isDefault: false
         jsonData:
           maxLines: 1000
-    
-    VALUES
+
+  VALUES
   }
 
   loki = {
-    values : <<-VALUES
+    values: <<-VALUES
 loki:
     auth_enabled: false
     schemaConfig:
@@ -63,25 +67,42 @@ loki:
         allow_structured_metadata: true
         volume_enabled: true
         retention_period: 672h
+
 deploymentMode: SimpleScalable
+
 backend:
     replicas: 3
     persistence:
         storageClass: gp3
+
+    nodeSelector:
+        karpenter.sh/nodepool: loki
+
 read:
     replicas: 3
+
+    nodeSelector:
+        karpenter.sh/nodepool: loki
+
 write:
     replicas: 3 # To ensure data durability with replication
     persistence:
         storageClass: gp3
-# Enable minio for storage
-minio:
-    enabled: false
+
+    nodeSelector:
+        karpenter.sh/nodepool: loki        
+
 gateway:
     replicas: 3
     service:
         type: NodePort
+
+    nodeSelector:
+        karpenter.sh/nodepool: loki
+
+minio:
+    enabled: false
+
     VALUES
   }
-
 }
