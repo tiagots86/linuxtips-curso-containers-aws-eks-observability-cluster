@@ -53,5 +53,5 @@ karpenter_capacity = [
     instance_sizes     = ["large", "xlarge", "2xlarge"]
     capacity_type      = ["spot", "on-demand"]
     availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
-  },    
+  },
 ]

@@ -1,6 +1,6 @@
 locals {
   grafana = {
-    values: <<-VALUES
+    values : <<-VALUES
 adminUser: admin
 adminPassword: linuxtips        
         
@@ -33,7 +33,7 @@ datasources:
   }
 
   loki = {
-    values: <<-VALUES
+    values : <<-VALUES
 loki:
     auth_enabled: false
     schemaConfig:
