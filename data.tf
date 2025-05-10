@@ -3,7 +3,7 @@ data "aws_ssm_parameter" "vpc" {
 }
 
 data "aws_caller_identity" "current" {
-
+  
 }
 
 data "aws_ssm_parameter" "subnets" {
@@ -16,10 +16,12 @@ data "aws_ssm_parameter" "lb_subnets" {
   name  = var.ssm_lb_subnets[count.index]
 }
 
+
 data "aws_ssm_parameter" "lb_grafana_subnets" {
   count = length(var.ssm_grafana_subnets)
   name  = var.ssm_grafana_subnets[count.index]
 }
+
 
 data "aws_eks_cluster_auth" "default" {
   name = aws_eks_cluster.main.id
