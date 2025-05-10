@@ -19,6 +19,7 @@ initChownData:
   loki = {
     values : <<-VALUES
 loki:
+    auth_enabled: false
     schemaConfig:
         configs:
         - from: "2024-04-01"
