@@ -17,6 +17,25 @@ resource "aws_eks_addon" "cni" {
   ]
 }
 
+data "aws_eks_addon_version" "efs" {
+  addon_name         = "aws-efs-csi-driver"
+  kubernetes_version = aws_eks_cluster.main.version
+  most_recent        = true
+} 
+
+resource "aws_eks_addon" "efs_csi" {
+  cluster_name = aws_eks_cluster.main.name
+  addon_name   = "aws-efs-csi-driver"
+
+  addon_version               = data.aws_eks_addon_version.efs.version
+  resolve_conflicts_on_create = "OVERWRITE"
+  resolve_conflicts_on_update = "OVERWRITE"
+
+  depends_on = [
+    aws_eks_access_entry.nodes
+  ]
+}
+
 // CoreDNS 
 
 # data "aws_eks_addon_version" "coredns" {
