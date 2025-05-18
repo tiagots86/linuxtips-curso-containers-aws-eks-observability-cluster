@@ -28,6 +28,11 @@ datasources:
         isDefault: false
         jsonData:
           maxLines: 1000
+      - name: Tempo
+        type: tempo
+        access: proxy
+        url: http://tempo-gateway.tempo.svc.cluster.local
+        basicAuth: false
 
   VALUES
   }
