@@ -105,4 +105,53 @@ minio:
 
     VALUES
   }
+
+  tempo = {
+    values : <<-VALUES
+storage:
+    trace:
+        backend: s3
+        s3:
+            bucket: ${aws_s3_bucket.tempo.id}
+            region: ${var.region}
+            endpoint: s3.amazonaws.com
+            forcepathstyle: false
+gateway:
+    enabled: true
+    replicas: 3
+    service:
+        type: NodePort
+    nodeSelector:
+        karpenter.sh/nodepool: tempo
+queryFrontend:
+    replicas: 3
+    query:
+        enabled: false
+    nodeSelector:
+        karpenter.sh/nodepool: tempo       
+querier:
+    replicas: 3
+    nodeSelector:
+        karpenter.sh/nodepool: tempo       
+distributor:
+    enabled: true
+    replicas: 3
+    nodeSelector:
+        karpenter.sh/nodepool: tempo           
+ingester:
+    replicas: 3
+    nodeSelector:
+        karpenter.sh/nodepool: tempo     
+compactor:
+    replicas: 3
+    nodeSelector:
+        karpenter.sh/nodepool: tempo       
+traces:
+    otlp:
+        http:
+            enabled: true
+    grpc:
+        enabled: true
+    VALUES
+  }
 }
