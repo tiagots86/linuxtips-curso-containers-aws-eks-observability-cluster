@@ -33,6 +33,13 @@ datasources:
         access: proxy
         url: http://tempo-gateway.tempo.svc.cluster.local
         basicAuth: false
+      - name: Mimir
+        type: prometheus
+        access: proxy
+        url: http://mimir-nginx.mimir.svc.cluster.local:80/prometheus
+        isDefault: true
+        jsonData:
+          prometheusType: Mimir
 
   VALUES
   }
