@@ -28,6 +28,12 @@ datasources:
         isDefault: false
         jsonData:
           maxLines: 1000
+          derivedFields:
+          - datasourceName: Tempo
+            datasourceUid: Tempo
+            matcherRegex: '\\"traceID\\":\\"([^\\"]+)\\"'
+            name: traceID
+            url: $$${__value.raw}
       - name: Tempo
         type: tempo
         access: proxy
