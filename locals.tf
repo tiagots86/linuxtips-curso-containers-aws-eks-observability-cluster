@@ -1,6 +1,6 @@
 locals {
   grafana = {
-    values : <<-VALUES
+    values: <<-VALUES
 adminUser: admin
 adminPassword: linuxtips        
         
@@ -34,6 +34,8 @@ datasources:
             matcherRegex: '\\"traceID\\":\\"([^\\"]+)\\"'
             name: traceID
             url: $$${__value.raw}
+
+
       - name: Tempo
         type: tempo
         access: proxy
@@ -48,6 +50,8 @@ datasources:
             enabled: true
           tracesToLogs:
             datasourceUid: 'Loki'
+
+
       - name: Mimir
         type: prometheus
         access: proxy
@@ -55,12 +59,13 @@ datasources:
         isDefault: true
         jsonData:
           prometheusType: Mimir
+          
 
   VALUES
   }
 
   loki = {
-    values : <<-VALUES
+    values: <<-VALUES
 loki:
     auth_enabled: false
     schemaConfig:
@@ -133,8 +138,8 @@ minio:
     VALUES
   }
 
-  tempo = {
-    values : <<-VALUES
+    tempo = {
+        values: <<-VALUES
 storage:
     trace:
         backend: s3
@@ -200,11 +205,13 @@ global_overrides:
   defaults:
     metrics_generator:
       processors: [service-graphs, span-metrics, local-blocks]
-    VALUES
-  }
 
-  mimir = {
-    values : <<-VALUES
+    VALUES
+    }
+
+
+mimir = {
+        values: <<-VALUES
 enterprise:
     enabled: false
 graphite:
@@ -418,6 +425,6 @@ gateway:
     karpenter.sh/nodepool: mimir
 
     VALUES
-  }
+    }
 
 }
